@@ -119,3 +119,158 @@ function renderSpotlight() {
 
 // Initialize when page loads
 document.addEventListener('DOMContentLoaded', renderSpotlight);
+
+// Array of excluded dates in YYYY-MM-DD format
+const excludedDates = [
+    '2025-05-13', // Summer Break
+    '2025-05-27', // Summer Break
+    '2025-08-12', 
+    '2025-08-26', // First week of the Fall 2025 Semester
+];
+
+// Function to check if a date is excluded
+function isExcludedDate(date) {
+    const formattedDate = date.toISOString().split('W')[0]; // Convert to YYYY-MM-DD
+    return excludedDates.includes(formattedDate);
+}
+
+function getNextMeetingDate() {
+    const today = new Date(); // Use current date
+    let current = new Date(today);
+    current.setDate(1); // Start search from 1st of current month
+
+    for (let i = 0; i < 12; i++) { // Search next 12 months
+        const month = current.getMonth();
+        const year = current.getFullYear();
+        const inSemester = (month >= 0 && month <= 4) || (month >= 7 && month <= 11);
+
+        if (inSemester) {
+            const wednesdays = [];
+            let d = new Date(year, month, 1);
+            let dayOfWeek = d.getDay();
+            let daysToAdd = (3 - dayOfWeek + 7) % 7;
+            d.setDate(d.getDate() + daysToAdd);
+
+            while (d.getMonth() === month) {
+                wednesdays.push(new Date(d));
+                d.setDate(d.getDate() + 7);
+            }
+
+            const todayDateOnly = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+
+            // Check second Tuesday
+            if (wednesdays.length >= 2) {
+                const second = wednesdays[1];
+                const secondDateOnly = new Date(second.getFullYear(), second.getMonth(), second.getDate());
+                if (secondDateOnly >= todayDateOnly && !isExcludedDate(second)) {
+                    return second.toLocaleDateString('en-US', { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' });
+                }
+            }
+
+            // Check fourth Tuesday
+            if (wednesdays.length >= 4) {
+                const fourth = wednesdays[3];
+                const fourthDateOnly = new Date(fourth.getFullYear(), fourth.getMonth(), fourth.getDate());
+                if (fourthDateOnly >= todayDateOnly && !isExcludedDate(fourth)) {
+                    return fourth.toLocaleDateString('en-US', { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' });
+                }
+            }
+        }
+        current.setDate(1);
+        current.setMonth(current.getMonth() + 1);
+    }
+    return "TBD - Check Back Soon";
+}
+
+// --- Combined DOMContentLoaded Listener ---
+document.addEventListener('DOMContentLoaded', () => {
+
+// 1. Set Next Meeting Date
+const nextMeetingElement = document.getElementById('nextMeetingDate');
+if (nextMeetingElement) {
+    nextMeetingElement.textContent = getNextMeetingDate();
+} else {
+    console.error("Element with ID 'nextMeetingDate' not found.");
+};
+})
+
+// Wait for the page to fully load
+document.addEventListener('DOMContentLoaded', function() {
+    
+    const searchInput = document.querySelector('.search-input');
+    const filterBadges = document.querySelectorAll('.filter-badge');
+    const facultyCards = document.querySelectorAll('.faculty-card');
+    
+    let currentFilter = 'All';   // default filter
+
+    // Function to filter cards based on search + active badge
+    function filterFaculty() {
+        const searchTerm = searchInput.value.toLowerCase().trim();
+
+        facultyCards.forEach(card => {
+            const col = card.closest('.col-12');
+            
+            // Get searchable content
+            const name = card.querySelector('.faculty-name').textContent.toLowerCase();
+            const role = card.querySelector('.faculty-role').textContent.toLowerCase();
+            const bio   = card.querySelector('.faculty-bio').textContent.toLowerCase();
+            
+            // Check search match
+            const searchMatch = !searchTerm || 
+                name.includes(searchTerm) || 
+                role.includes(searchTerm) || 
+                bio.includes(searchTerm);
+            
+            // Check category match
+            let categoryMatch = true;
+            
+            if (currentFilter !== 'All') {
+                const badges = card.querySelectorAll('.badge-faculty');
+                let hasCategory = false;
+                
+                badges.forEach(badge => {
+                    if (badge.textContent.trim() === currentFilter) {
+                        hasCategory = true;
+                    }
+                });
+                
+                categoryMatch = hasCategory;
+            }
+            
+            // Show card only if both search and category match
+            if (searchMatch && categoryMatch) {
+                col.style.display = '';
+            } else {
+                col.style.display = 'none';
+            }
+        });
+    }
+
+    // Live search
+    searchInput.addEventListener('input', filterFaculty);
+
+    // Filter badge clicks
+    filterBadges.forEach(badge => {
+        badge.addEventListener('click', function() {
+            // Remove active class from all badges
+            filterBadges.forEach(b => b.classList.remove('active'));
+            
+            // Add active class to clicked badge
+            this.classList.add('active');
+            
+            // Update current filter
+            currentFilter = this.textContent.trim();
+            
+            // Re-filter everything
+            filterFaculty();
+        });
+    });
+
+    // Optional: Pressing Escape clears the search
+    searchInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            this.value = '';
+            filterFaculty();
+        }
+    });
+});
