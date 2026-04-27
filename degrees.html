@@ -12,24 +12,20 @@
     </head>
     <body>
         <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg fixed-top shadow-sm">
-            <div class="container px-4">
+        <nav class="navbar navbar-expand-md sticky-top">
+            <div class="container-xl px-4">
                 <a class="navbar-brand font-headline fw-bold text-primary fs-3" href="index.html"><img class="navbar" src="static/images/ac/cis_logo_no_bkgd.webp"></a>
-                <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-                    <ul class="navbar-nav gap-lg-4 font-label">
-                        <li class="nav-item"><a class="nav-link text-secondary" href="index.html">Home</a></li>
-                        <li class="nav-item"><a class="nav-link active" href="degrees.html">Degrees</a></li>
-                        <li class="nav-item"><a class="nav-link text-secondary" href="faculty.html">Faculty</a></li>
-                        <li class="nav-item"><a class="nav-link text-secondary" href="club.html">Club</a></li>
-                        <li class="nav-item"><a class="nav-link text-secondary" href="software.html">Software</a></li>
+                <button class="navbar-toggler" data-bs-target="#navbarMain" data-bs-toggle="collapse" type="button"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarMain">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                        <li class="nav-item"><a href="degrees.html" target="_blank" class="nav-link">Degrees</a></li>
+                        <li class="nav-item"><a href="faculty.html" target="_blank" class="nav-link">Faculty</a></li>
+                        <li class="nav-item"><a href="club.html" target="_blank" class="nav-link disabled">Club</a></li>
+                        <li class="nav-item"><a href="software.html" target="_blank" class="nav-link disabled">Software</a></li>
                     </ul>
-                </div>
-                <div class="d-flex align-items-center gap-3">
-                    <div class="search-bar d-none d-lg-flex align-items-center">
-                        <span class="material-symbols-outlined me-2" style="font-size: 20px;">search</span>
-                        <input placeholder="Search programs..." type="text"/>
-                    </div>
-                    <button class="btn-gradient font-label small">Apply Now</button>
+                    <a href="https://www.actx.edu/enroll/" target="_blank" class="btn btn-apply">Apply Now</a>
+    
                 </div>
             </div>
         </nav>
