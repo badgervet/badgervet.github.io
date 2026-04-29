@@ -39,7 +39,7 @@ const spotlightPool = [
         name: "Lynne Kenney",
         title: "Instructor",
         type: "fulltime",
-        image: "static/images/full_time_faculty/lynne_kenney.jpg",
+        image: "static/images/full_time_faculty/lynne_kenney.png",
         answers: ["", "", ""]   // Leave empty for now — we'll fill them later
     }
     // ... keep adding more
@@ -273,4 +273,176 @@ document.addEventListener('DOMContentLoaded', function() {
             filterFaculty();
         }
     });
+});
+
+// ==================== SOFTWARE DATA ====================
+const softwarePool = [
+    {
+        name: "Python",
+        desc: "High-level programming language for general-purpose programming and data science.",
+        category: "programming",
+        icon: "terminal",
+        linkText: "Download",
+        linkIcon: "download",
+        downloadUrl: "https://www.python.org/downloads/"   // Official site (auto-detects OS)
+    },
+    {
+        name: "VS Code",
+        desc: "Modern code editor redefined and optimized for building and debugging web and cloud apps.",
+        category: "ide",
+        icon: "code",
+        linkText: "Download",
+        linkIcon: "download",
+        downloadUrl: "https://code.visualstudio.com/download"
+    },
+    {
+        name: "Git",
+        desc: "Distributed version control system to track changes in source code during development.",
+        category: "vcs",
+        icon: "account_tree",
+        linkText: "Download",
+        linkIcon: "download",
+        downloadUrl: "https://git-scm.com/downloads"
+    },
+    {
+        name: "Packet Tracer",
+        desc: "Powerful network simulation tool for practicing configuration and troubleshooting.",
+        category: "net",
+        icon: "router",
+        linkText: "Get Student License",
+        linkIcon: "verified",
+        downloadUrl: "https://www.netacad.com/resources/lab-downloads"   // Cisco NetAcad
+    },
+    {
+        name: "VirtualBox",
+        desc: "Powerful x86 and AMD64/Intel64 virtualization product for enterprise and home use.",
+        category: "virt",
+        icon: "layers",
+        linkText: "Download",
+        linkIcon: "download",
+        downloadUrl: "https://www.virtualbox.org/wiki/Downloads"
+    },
+    {
+        name: "Wireshark",
+        desc: "The world's foremost network protocol analyzer.",
+        category: "sec",
+        icon: "monitoring",
+        linkText: "Download",
+        linkIcon: "download",
+        downloadUrl: "https://www.wireshark.org/download.html"
+    },
+    {
+        name: "MySQL",
+        desc: "The world's most popular open source database, widely used in web development.",
+        category: "db",
+        icon: "database",
+        linkText: "Download",
+        linkIcon: "download",
+        downloadUrl: "https://dev.mysql.com/downloads/installer/"
+    },
+    {
+        name: "Notepad++",
+        desc: "A free source code editor and Notepad replacement that supports several languages.",
+        category: "programming",
+        icon: "edit_note",
+        linkText: "Download",
+        linkIcon: "download",
+        downloadUrl: "https://notepad-plus-plus.org/downloads/"
+    },
+    {
+        name: "Autopsy",
+        desc: "Digital forensics platform for analyzing hard drives, smartphones, and more.",
+        category: "sec",
+        icon: "security",
+        linkText: "Download MSI",
+        linkIcon: "download",
+        downloadUrl: "https://github.com/sleuthkit/autopsy/releases/download/autopsy-4.23.0/autopsy-4.23.0-64bit.msi"
+    }
+]
+
+// ==================== GENERIC FILTERING SYSTEM ====================
+function initPageFilters() {
+    const searchInput = document.querySelector('.search-input');
+    const filterBadges = document.querySelectorAll('.filter-badge');
+    const softwareGrid = document.getElementById('software-grid');
+
+    if (!searchInput || !softwareGrid) return;   // Not on a filterable page
+
+    let currentFilter = 'all';
+
+    function renderSoftwareCards(filteredItems) {
+        softwareGrid.innerHTML = '';
+
+        if (filteredItems.length === 0) {
+            softwareGrid.innerHTML = `
+                <div class="col-12 text-center py-5">
+                    <p class="text-muted fs-5">No software found matching your criteria.</p>
+                </div>`;
+            return;
+        }
+
+        filteredItems.forEach(item => {
+            const cardHTML = `
+                <div class="col-lg-3 col-md-6">
+                    <div class="card h-100 premium-shadow border-0 software-card">
+                        <div class="card-body p-4">
+                            <div class="bg-primary bg-opacity-10 rounded-3 d-flex align-items-center justify-content-center mb-4" style="width:60px;height:60px;">
+                                <span class="material-symbols-outlined text-primary fs-2">${item.icon}</span>
+                            </div>
+                            <h3 class="font-headline fw-bold fs-4 mb-3">${item.name}</h3>
+                            <p class="text-muted mb-4">${item.desc}</p>
+                            <span class="badge bg-secondary-subtle text-secondary-emphasis">${item.category.toUpperCase()}</span>
+                        </div>
+                        <div class="card-footer bg-transparent border-0 pt-0 pb-4">
+                            <a href="${item.downloadUrl}" target="_blank" class="text-primary fw-bold text-decoration-none d-flex align-items-center">
+                                ${item.linkText} 
+                                <span class="material-symbols-outlined ms-2">${item.linkIcon}</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>`;
+            softwareGrid.innerHTML += cardHTML;
+        });
+    }
+
+    function filterItems() {
+        const term = searchInput.value.toLowerCase().trim();
+
+        const filtered = softwarePool.filter(item => {
+            const matchesSearch = !term || 
+                item.name.toLowerCase().includes(term) ||
+                item.desc.toLowerCase().includes(term);
+            
+            const matchesFilter = currentFilter === 'all' || item.category === currentFilter;
+            return matchesSearch && matchesFilter;
+        });
+
+        renderSoftwareCards(filtered);
+    }
+
+    // Event Listeners
+    searchInput.addEventListener('input', filterItems);
+
+    filterBadges.forEach(badge => {
+        badge.addEventListener('click', () => {
+            filterBadges.forEach(b => b.classList.remove('active'));
+            badge.classList.add('active');
+            currentFilter = badge.getAttribute('data-filter') || 'all';
+            filterItems();
+        });
+    });
+
+    // ←←← THIS IS THE FIX: Render cards immediately on page load
+    filterItems();
+}
+
+// Initialize everything
+document.addEventListener('DOMContentLoaded', () => {
+    initPageFilters();
+    
+    // Your existing code (next meeting date, spotlight, etc.)
+    const nextMeetingElement = document.getElementById('nextMeetingDate');
+    if (nextMeetingElement) {
+        nextMeetingElement.textContent = getNextMeetingDate();
+    }
 });
