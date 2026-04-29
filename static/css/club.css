@@ -1,0 +1,282 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Space+Grotesk:wght@300..700&display=swap');
+
+:root {
+    --primary-color: #003f87;
+    --primary-container: #0056b3;
+    --on-primary: #ffffff;
+    --secondary-container: #92c1fe;
+    --tertiary-fixed: #83fc8e;
+    --tertiary-container: #006722;
+    --on-tertiary-container: #6fe87c;
+    --surface-container-low: #ecf5fe;
+    --surface-container-lowest: #ffffff;
+    --surface-container-high: #e0e9f2;
+    --surface-container-highest: #dbe4ed;
+    --on-surface: #141d23;
+    --on-surface-variant: #424752;
+    --outline-variant: #c2c6d4;
+    --background: #f6faff;
+    --secondary-fixed: #d2e4ff;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--background);
+    color: var(--on-surface);
+    overflow-x: hidden;
+}
+
+.text-primary {color: #0033a0 !important;}
+
+.font-headline { font-family: 'Plus Jakarta Sans', sans-serif; }
+.font-label { font-family: 'Space Grotesk', sans-serif; }
+
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    vertical-align: middle;
+}
+
+.navbar {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background-color: rgba(255, 255, 255, 0.8) !important;
+    height: 80px;
+}
+
+.nav-link {
+    font-family: 'Space Grotesk', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 0.75rem;
+    color: #475569 !important;
+    font-weight: 600;
+}
+
+.nav-link.active {
+    color: var(--primary) !important;
+    border-bottom: 2px solid var(--primary);
+}
+
+.btn-apply {
+    background: linear-gradient(to right, var(--primary-color), var(--primary-container));
+    color: white;
+    border: none;
+    padding: 0.625rem 1.5rem;
+    border-radius: 0.75rem;
+    font-weight: 700;
+    font-family: 'Space Grotesk', sans-serif;
+    transition: transform 0.2s;
+}
+
+.btn-apply:hover {
+    transform: scale(0.95);
+    color: white;
+}
+
+.btn-primary-custom {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-container) 100%);
+    border: none;
+    color: white;
+    padding: 0.625rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 700;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.875rem;
+    transition: transform 0.2s;
+}
+
+.btn-primary-custom:hover {
+    transform: scale(0.95);
+    color: white;
+}
+
+.club-badge {
+    background-color: #83fc8e; 
+    color: #002106; 
+    padding: 0.5em 0.8em;
+}
+
+.hero-badge {
+    background-color: var(--secondary-fixed);
+    color: var(--on-secondary-fixed-variant);
+    padding: 0.375rem 1rem;
+    border-radius: 50rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-bottom: 1.5rem;
+}
+
+.hero-title {
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    font-weight: 800;
+    color: var(--primary-color);
+    line-height: 1.1;
+    letter-spacing: -0.04em;
+}
+
+.hero-title span {
+    color: #115cb9;
+    font-style: italic;
+}
+
+.hero-image-wrapper {
+    position: relative;
+}
+
+.hero-image-card {
+    border-radius: 1.5rem;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    transform: rotate(3deg);
+    transition: transform 0.5s ease;
+    z-index: 10;
+}
+
+.hero-image-card:hover {
+    transform: rotate(0deg);
+}
+
+.hero-image-bg {
+    position: absolute;
+    top: -1.5rem;
+    left: -1.5rem;
+    width: 100%;
+    height: 100%;
+    background-color: var(--primary-fixed-dim);
+    border-radius: 1.5rem;
+    z-index: -1;
+    transform: rotate(-3deg);
+}
+
+.bento-card {
+    background-color: #ffffff;
+    border-radius: 1.5rem;
+    padding: 2.5rem;
+    height: 100%;
+    transition: box-shadow 0.3s ease;
+    border: none;
+}
+
+.bento-card:hover {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.bento-card-dark {
+    background-color: var(--primary-color);
+    color: var(--on-primary);
+    position: relative;
+    overflow: hidden;
+}
+
+.bento-icon-bg {
+    position: absolute;
+    bottom: -2.5rem;
+    right: -2.5rem;
+    opacity: 0.1;
+    font-size: 10rem !important;
+    transition: transform 0.3s ease;
+}
+
+.bento-card-dark:hover .bento-icon-bg {
+    transform: scale(1.1);
+}
+
+.section-line {
+    width: 3rem;
+    height: 0.25rem;
+    background-color: var(--primary);
+    display: inline-block;
+    margin-right: 1rem;
+}
+
+.project-card img {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    filter: grayscale(100%);
+    transition: all 0.5s ease;
+    transform: scale(1.05);
+}
+
+.project-card:hover img {
+    filter: grayscale(0);
+    transform: scale(1);
+}
+
+.project-img-container {
+    border-radius: 1rem;
+    overflow: hidden;
+    position: relative;
+    background-color: var(--surface-container-high);
+}
+
+.project-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 63, 135, 0.2);
+    mix-blend-mode: multiply;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.project-card:hover .project-overlay {
+    opacity: 1;
+}
+
+.tag {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--primary);
+    padding: 0.25rem 0.75rem;
+    border: 1px solid rgba(0, 63, 135, 0.2);
+    border-radius: 50rem;
+    margin-right: 0.5rem;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.sync-row {
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--surface-container-high);
+    transition: background-color 0.2s;
+    cursor: pointer;
+    border-radius: 0.5rem;
+}
+
+.sync-row:hover {
+    background-color: var(--surface-container-low);
+}
+
+.discord-cta {
+    background-color: #5865F2;
+    border-radius: 1.5rem;
+    padding: 5rem 2rem;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.discord-btn {
+    background-color: white;
+    color: #5865F2;
+    border: none;
+    padding: 1.25rem 2.5rem;
+    border-radius: 0.75rem;
+    font-weight: 800;
+    font-size: 1.125rem;
+    transition: all 0.3s;
+}
+
+.discord-btn:hover {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    transform: scale(1.05);
+}
+
+footer {
+    background-color: #f8fafc;
+    padding-top: 4rem;
+    padding-bottom: 2rem;
+}
