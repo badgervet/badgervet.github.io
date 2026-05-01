@@ -37,24 +37,34 @@ body {
 }
 
 .navbar {
+    height: 80px;
+    background-color: rgba(255, 255, 255, 0.8) !important;
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    background-color: rgba(255, 255, 255, 0.8) !important;
-    height: 80px;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    
 }
 
 .nav-link {
     font-family: 'Space Grotesk', sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    font-size: 0.75rem;
-    color: #475569 !important;
-    font-weight: 600;
+    font-weight: 500;
+    color: var(--on-surface-variant) !important;
+    margin: 0 1rem;
+    transition: color 0.2s;
+}
+
+.navbar-img {
+    position: relative;
+    top: 0;
+    padding: 0;
+    width: auto;
+    height: 66px;
 }
 
 .nav-link.active {
-    color: var(--primary) !important;
-    border-bottom: 2px solid var(--primary);
+    color: #115cb9 !important;
+    border-bottom: 2px solid #115cb9;
+    font-weight: 700;
 }
 
 .btn-apply {
@@ -72,6 +82,7 @@ body {
     transform: scale(0.95);
     color: white;
 }
+
 
 .btn-primary-custom {
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-container) 100%);

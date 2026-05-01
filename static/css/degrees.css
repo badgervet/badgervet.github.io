@@ -33,13 +33,56 @@ body {
 .font-label { font-family: 'Space Grotesk', sans-serif; }
 
 .navbar {
+    height: 80px;
     background-color: rgba(255, 255, 255, 0.8) !important;
     backdrop-filter: blur(12px);
-    height: 80px;
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    
 }
+
+.nav-link {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500;
+    color: var(--on-surface-variant) !important;
+    margin: 0 1rem;
+    transition: color 0.2s;
+}
+
+.navbar-img {
+    position: relative;
+    top: 0;
+    padding: 0;
+    width: auto;
+    height: 66px;
+}
+
+.nav-link.active {
+    color: #115cb9 !important;
+    border-bottom: 2px solid #115cb9;
+    font-weight: 700;
+}
+
+.btn-apply {
+    background: linear-gradient(to right, var(--primary-color), var(--primary-container));
+    color: white;
+    border: none;
+    padding: 0.625rem 1.5rem;
+    border-radius: 0.75rem;
+    font-weight: 700;
+    font-family: 'Space Grotesk', sans-serif;
+    transition: transform 0.2s;
+}
+
+.btn-apply:hover {
+    transform: scale(0.95);
+    color: white;
+}
+
 
 .text-gradient {
     background: linear-gradient(135deg, var(--primary) 0%, var(--primary-container) 100%);
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }

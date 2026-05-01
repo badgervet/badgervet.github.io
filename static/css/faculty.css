@@ -1,36 +1,37 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Space+Grotesk:wght@300..700&display=swap');
 
 :root {
-            --primary: #003f87;
-            --primary-container: #0056b3;
-            --on-primary: #ffffff;
-            --secondary: #2d6197;
-            --background: #f6faff;
-            --surface-container-low: #ecf5fe;
-            --on-surface: #141d23;
-            --on-surface-variant: #424752;
-            --tertiary-fixed: #83fc8e;
-            --on-tertiary-fixed-variant: #00531a;
-        }
+    --primary: #003f87;
+    --primary-color: #003f87;
+    --primary-container: #0056b3;
+    --on-primary: #ffffff;
+    --secondary: #2d6197;
+    --background: #f6faff;
+    --surface-container-low: #ecf5fe;
+    --on-surface: #141d23;
+    --on-surface-variant: #424752;
+    --tertiary-fixed: #83fc8e;
+    --on-tertiary-fixed-variant: #00531a;
+}
 
-        body { 
-            font-family: 'Inter', sans-serif; 
-            background-color: var(--background);
-            color: var(--on-surface);
-        }
+body { 
+    font-family: 'Inter', sans-serif; 
+    background-color: var(--background);
+    color: var(--on-surface);
+}
 
-        h1, h2, h3, h4 { font-family: 'Plus Jakarta Sans', sans-serif; }
-        .label-text { font-family: 'Space Grotesk', sans-serif; }
+h1, h2, h3, h4 { font-family: 'Plus Jakarta Sans', sans-serif; }
+.label-text { font-family: 'Space Grotesk', sans-serif; }
 
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-            display: inline-block;
-            vertical-align: middle;
-        }
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    display: inline-block;
+    vertical-align: middle;
+}
 
-        .text-primary {color: #0033a0 !important;}
+.text-primary {color: #0033a0 !important;}
 
-        /* Navigation styling */
+/* Navigation styling */
 .navbar {
     height: 80px;
     background-color: rgba(255, 255, 255, 0.8) !important;
@@ -61,20 +62,23 @@
     border-bottom: 2px solid #115cb9;
     font-weight: 700;
 }
+
 .btn-apply {
-    background: linear-gradient(to right, var(--primary), var(--primary-container));
+    background: linear-gradient(to right, var(--primary-color), var(--primary-container));
     color: white;
     border: none;
     padding: 0.625rem 1.5rem;
     border-radius: 0.75rem;
     font-weight: 700;
-    font-size: 0.875rem;
-    transition: all 0.2s;
+    font-family: 'Space Grotesk', sans-serif;
+    transition: transform 0.2s;
 }
+
 .btn-apply:hover {
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    transform: scale(0.95);
     color: white;
 }
+
 
 /* Faculty Card custom styling */
 .faculty-card {
